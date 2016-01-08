@@ -1,9 +1,13 @@
 var config = require('./config/config.json'),
     twitch = require('./js/twitch')(config),
     storage = require('./js/storage')(config.storage),
+    users = require('./js/users')(twitch, storage),
     parseMessage = require('./js/parse-message'),
     workingOn = require('./js/commands/workingon')(twitch, 'a twitch bot! Say "Hi!"'),
-    cost = require('./js/commands/cost');
+    cost = require('./js/commands/cost'),
+    joke = require('./js/commands/joke'),
+    eightBall = require('./js/commands/eight-ball'),
+    bc = require('./js/commands/bc');
 
 var AdminCommands = {
         "setworkingon": workingOn.setWorkingOn
@@ -14,6 +18,15 @@ var AdminCommands = {
         "redbull": cost.bind(null, twitch, 2.19, "redbulls"),
         "cappuccino": cost.bind(null, twitch, 3.45, "cappuccinos"),
         "coffeegulps": cost.bind(null, twitch, 0.10, "gulps of coffee"),
+        "cappuccinogulps": cost.bind(null, twitch, 0.14, "gulps of cappuccino"),
+        "joke": joke.bind(null,twitch),
+        "jokes": joke.bind(null,twitch),
+        "8ball": eightBall.bind(null,twitch),
+        "eightball": eightBall.bind(null,twitch),
+        "bc": bc.bind(null, twitch),
+        "benedictcumberbatch": bc.bind(null, twitch),
+        "benedict": bc.bind(null, twitch)
+
     },
     textResponses = require('./js/commands/text-responses')(twitch);
 
@@ -24,14 +37,6 @@ twitch.onchat(function(channel, userInfo, message, self) {
 twitch.onwhisper(function(username, message) {
     console.log("whisper: " + username + " " + message);
     executeCommands(username, message);
-});
-
-twitch.onjoin(function(channel, username) {
-    console.log("JOIN: " + username);
-});
-
-twitch.onpart(function(channel, username) {
-    console.log("PART: " + username);
 });
 
 function executeCommands(user, message) {
@@ -55,11 +60,10 @@ function executeAdminCommands(command, parameters, user, message) {
 
 //Features:
 //refactor commands
-//DB integration : https://www.npmjs.com/package/cradle
+//Loop through users!!!!
 //In chat users display (mod whack-a-mole)
 //command list (per-user availability)
 //user levels (db?)
-//jokes : http://theoatmeal.com/djtaf/
 //push messages through wrapper and check for chat delay
 //dynamic add commands (and save to file/db)
 //spam protection?
@@ -71,5 +75,4 @@ function executeAdminCommands(command, parameters, user, message) {
 //betting?
 //magic 8 ball
 //raid system (post link and host)
-//Benedict Cumberbatch : https://github.com/tangentialism/hubot-cumberbot/blob/master/cumberbatch.coffee
 //twitch alerts integration : https://twitchalerts.readme.io/

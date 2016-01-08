@@ -15,6 +15,8 @@
   "author": "aliciawoitte@gmail.com",
   "license": "MIT",
   "dependencies": {
+    "cradle": "^0.6.9",
+    "money": "^0.2.0",
     "tmi.js": "0.0.24"
   }
 }

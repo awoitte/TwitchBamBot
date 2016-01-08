@@ -1,0 +1,20 @@
+{
+  "name": "twitchbot",
+  "version": "0.0.1",
+  "description": "twitch IRC bot for interacting with users",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "twitch",
+    "IRC",
+    "bot",
+    "twitchbot"
+  ],
+  "author": "aliciawoitte@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "tmi.js": "0.0.24"
+  }
+}

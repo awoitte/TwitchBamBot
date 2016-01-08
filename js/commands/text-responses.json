@@ -1,12 +1,12 @@
 {
-	"hi": "Heyya! o/",
-	"hello": "Heyya! o/",
-	"hai": "Hai o/ !!",
+	"hi": "Heyya! {{user}} o/",
+	"hello": "Heyya {{user}}! o/",
+	"hai": "Hai {{user}} o/ !!",
+	"heyya": "hi {{user}} o/",
 	"ping": "pong",
 	"pong": "Kappa",
 	"poing": "No! It's ping!",
 	"pung": ":V",
-	"heyya": "hi o/",
 	"twitter": "https://twitter.com/thatsBamboo",
 	"schedule": "I try to stream every day around noon EST, I also update twitter with any changes: https://twitter.com/thatsBamboo",
 	"refactor": "REFACTOR HYYYPE!!",
@@ -15,5 +15,6 @@
 	"lewd": "LEWD!",
 	"brohoho": "FailFish",
 	"mylittlebrohoho": "FailFish",
-	"tdd": "Test Driven Development Kreygasm"
+	"tdd": "Test Driven Development Kreygasm",
+	"legend": "{{parameters}} IS A LEGEND!!!!!"
 }

@@ -17,6 +17,7 @@
   "dependencies": {
     "cradle": "^0.6.9",
     "money": "^0.2.0",
+    "mustache": "^2.2.1",
     "tmi.js": "0.0.24"
   }
 }

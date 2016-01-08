@@ -49,7 +49,7 @@ function executeCommands(user, message) {
 }
 
 function executeUserCommands(command, parameters, user, message) {
-    if (textResponses.isTextCommand(command)) textResponses.doTextCommand(command);
+    if (textResponses.isTextCommand(command)) textResponses.doTextCommand(command, parameters, user, message);
     if (customCommands[command]) customCommands[command](command, parameters, user, message);
 }
 
@@ -71,8 +71,6 @@ function executeAdminCommands(command, parameters, user, message) {
 //SFX
 //Point cost on commands
 //quote system
-//templates for text responses
 //betting?
-//magic 8 ball
 //raid system (post link and host)
 //twitch alerts integration : https://twitchalerts.readme.io/

@@ -1,7 +1,9 @@
 var config = require('./config/config.json'),
     twitch = require('./js/twitch')(config),
-    storage = require('./js/storage')(config.storage),
-    users = require('./js/users')(twitch, storage),
+    userStorage = require('./js/storage')(config.storage, 'twitchbot'),
+    users = require('./js/users')(twitch, (3 * 1000 * 60)),
+    userPoints = require('./js/user-points')(userStorage),
+    reportPoints = require('./js/commands/report-points'),
     parseMessage = require('./js/parse-message'),
     workingOn = require('./js/commands/workingon')(twitch, 'a twitch bot! Say "Hi!"'),
     cost = require('./js/commands/cost'),
@@ -25,7 +27,8 @@ var AdminCommands = {
         "eightball": eightBall.bind(null,twitch),
         "bc": bc.bind(null, twitch),
         "benedictcumberbatch": bc.bind(null, twitch),
-        "benedict": bc.bind(null, twitch)
+        "benedict": bc.bind(null, twitch),
+        "points": reportPoints.bind(null, userPoints, twitch)
 
     },
     textResponses = require('./js/commands/text-responses')(twitch);
@@ -39,8 +42,12 @@ twitch.onwhisper(function(username, message) {
     executeCommands(username, message);
 });
 
-function executeCommands(user, message) {
+users.userPersistsInChat(function (user) {
+    userPoints.awardUserPoint(user)
+})
 
+
+function executeCommands(user, message) {
     var parsed = parseMessage(message);
 
     if (user === config.username) return;

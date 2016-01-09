@@ -2,6 +2,7 @@
 	"hi": "Heyya! {{user}} o/",
 	"hello": "Heyya {{user}}! o/",
 	"hai": "Hai {{user}} o/ !!",
+	"hey": "Hai {{user}} o/ !!",
 	"heyya": "hi {{user}} o/",
 	"ping": "pong",
 	"pong": "Kappa",
@@ -16,5 +17,11 @@
 	"brohoho": "FailFish",
 	"mylittlebrohoho": "FailFish",
 	"tdd": "Test Driven Development Kreygasm",
-	"legend": "{{parameters}} IS A LEGEND!!!!!"
+	"legend": "{{parameters}} IS A LEGEND!!!!!",
+	"bees": "Beads?",
+	"beads": "Bees?",
+	"hype": "HYYYYYPE HYPE HYPE HYPE HYPE!!",
+	"knock": "Who's there?",
+	"asl": "2 days/non-binary/hogwarts",
+	"tinyhype": "ʰʸᵖᵉ"
 }

@@ -1,7 +1,8 @@
-var cradle = require('cradle');
+var cradle = require('cradle'),
+    extend = require('extend');
 
-module.exports = function(config) {
-    var db = new(cradle.Connection)().database('twitchbot');
+module.exports = function(config, storageName) {
+    var db = new(cradle.Connection)().database(storageName);
 
     db.exists(function(err, exists) {
         if (err) {
@@ -19,7 +20,8 @@ module.exports = function(config) {
     return {
     	saveAThing: saveAThing.bind(null, db),
     	getAThing: getAThing.bind(null, db),
-    	removeAThing: removeAThing.bind(null, db)
+    	removeAThing: removeAThing.bind(null, db),
+        updateAThing: updateAThing.bind(null, db)
     };
 };
 
@@ -34,4 +36,12 @@ function getAThing (db, id, callback) {
 
 function removeAThing (db,id) {
 	db.remove(id);
+}
+
+function updateAThing (db, id, thing, callback) {
+    db.get(id, function (err, doc) {
+        if(err)return; callback(err);
+        var newThing = extend({}, doc, thing);
+        db.save(id,newThing, callback);
+    });
 }

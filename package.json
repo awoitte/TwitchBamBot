@@ -16,8 +16,10 @@
   "license": "MIT",
   "dependencies": {
     "cradle": "^0.6.9",
+    "extend": "^3.0.0",
     "money": "^0.2.0",
     "mustache": "^2.2.1",
+    "request": "^2.67.0",
     "tmi.js": "0.0.24"
   }
 }

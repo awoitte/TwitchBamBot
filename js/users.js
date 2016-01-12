@@ -1,21 +1,28 @@
-var request = require('request');
+var request = require('request'),
+    loop = require('./variable-time-loop');
 
-module.exports = function(twitch, checkFrequency) {
+module.exports = function(twitch, onlineFrequency, offlineFrequency) {
 
     var options = {
         users: [],
-        userInChatCallbacks: []
+        userInChatCallbacks: [],
+        online: true
     };
 
-    // twitch.onjoin(recordAUser.bind(null));
+    twitch.onjoin(recordAUser.bind(null, options));
 
     // twitch.onpart(discardAUser.bind(null));
 
 
-    fetchUserList(options, handleChatInfoResponse.bind(null, options));
-    setInterval(fetchUserList.bind(null,
-        options,
-        handleChatInfoResponse.bind(null, options)), checkFrequency);
+    loop(function() {
+        fetchUserList(
+            options,
+            handleChatInfoResponse.bind(null, options));
+        fetchOnlineStatus(options, handleOnlineResponse.bind(null, options));
+    }, function() {
+        console.log("online: " + options.online);
+        return options.online ? onlineFrequency : offlineFrequency;
+    });
 
     return {
         getUserList: getUserList.bind(null, options),
@@ -35,6 +42,9 @@ function fetchUserList(options, callback) {
                 options.lastRequestFinished = true;
                 if (!error && response.statusCode == 200) {
                     callback(body);
+                } else {
+                    console.log("fetch users error:" + error);
+                    if(response.statusCode != 200) console.log("with response code: " + response.statusCode);
                 }
             })
     }
@@ -58,9 +68,38 @@ function resetUsers(options) {
 
 function addUser(options, user) {
     if (options.users.indexOf(user) === -1) {
+        console.log("adding user " + user);
         options.users.push(user);
         options.userInChatCallbacks.forEach(function(callback) {
             callback(user);
         });
     }
+}
+
+function recordAUser(options, channel, username) {
+    addUser(options, username);
+}
+
+function fetchOnlineStatus(options, callback) {
+    if (!options.lastOnlineRequest || options.lastOnlineRequestFinished === true) {
+        options.lastOnlineRequestFinished = false;
+        options.lastOnlineRequest = request('https://api.twitch.tv/kraken/streams/thatsbamboo',
+            function(error, response, body) {
+                options.lastOnlineRequestFinished = true;
+                if (!error && response.statusCode == 200) {
+                    callback(body)
+                } else {
+                    console.log("fetch online error: " + error);
+                    if(response.statusCode != 200) console.log("with response code: " + response.statusCode);
+                }
+            })
+    }
+}
+
+function handleOnlineResponse(options, body) {
+    var status = JSON.parse(body);
+    if (status) {
+        options.online = !!status.stream;
+    }
+
 }

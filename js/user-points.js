@@ -7,7 +7,7 @@ module.exports = function(userStorage) {
 
 function awardUserPoint(storage, user, callback) {
     storage.getAThing(user, function(err, userObj) {
-        if (err) {
+        if (err && !err.headers.status === 404) {
             if (callback) callback(err);
             return;
         }

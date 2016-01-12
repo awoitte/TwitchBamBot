@@ -1,7 +1,7 @@
 var config = require('./config/config.json'),
     twitch = require('./js/twitch')(config),
     userStorage = require('./js/storage')(config.storage, 'twitchbot'),
-    users = require('./js/users')(twitch, (3 * 1000 * 60)),
+    users = require('./js/users')(twitch, (3 * 1000 * 60),(10 * 1000 * 60) ),
     userPoints = require('./js/user-points')(userStorage),
     reportPoints = require('./js/commands/report-points'),
     parseMessage = require('./js/parse-message'),
@@ -43,7 +43,9 @@ twitch.onwhisper(function(username, message) {
 });
 
 users.userPersistsInChat(function (user) {
-    userPoints.awardUserPoint(user)
+    userPoints.awardUserPoint(user, function (err) {
+        if(err) console.log(err);
+    })
 })
 
 
@@ -81,3 +83,4 @@ function executeAdminCommands(command, parameters, user, message) {
 //betting?
 //raid system (post link and host)
 //twitch alerts integration : https://twitchalerts.readme.io/
+// BUY PIZZA WITH POINTS

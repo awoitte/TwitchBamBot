@@ -1,18 +1,31 @@
 var config = require('./config/config.json'),
     twitch = require('./js/twitch')(config),
-    userStorage = require('./js/storage')(config.storage, 'twitchbot'),
+    Storage = require('./js/storage'),
+    commandCost = require('./js/command-cost'),
+    userStorage = Storage(config.storage, 'twitchbot'),
+    quoteStorage = Storage(config.storage, 'thatsbambotquotes'),
     users = require('./js/users')(twitch, (3 * 1000 * 60),(10 * 1000 * 60) ),
     userPoints = require('./js/user-points')(userStorage),
+    quotes = require('./js/quotes')(quoteStorage),
+    reportQuotes = require('./js/commands/report-quotes')(quotes, twitch),
     reportPoints = require('./js/commands/report-points'),
     parseMessage = require('./js/parse-message'),
     workingOn = require('./js/commands/workingon')(twitch, 'a twitch bot! Say "Hi!"'),
     cost = require('./js/commands/cost'),
     joke = require('./js/commands/joke'),
     eightBall = require('./js/commands/eight-ball'),
-    bc = require('./js/commands/bc');
+    bc = require('./js/commands/bc'),
+    frontEnd = require('./js/front-end')(__dirname + "\\public");
 
 var AdminCommands = {
-        "setworkingon": workingOn.setWorkingOn
+        "setworkingon": workingOn.setWorkingOn,
+        "adjustpoints": userPoints.modifyUserPoints.bind(null, function (err, userObj) {
+            if(err) twitch.say("Error: " + err)
+        }),
+        "addquote": reportQuotes.addQuote,
+        "addqoute": reportQuotes.addQuote,
+        "quoteadd": reportQuotes.addQuote,
+        "qouteadd": reportQuotes.addQuote,
     },
     customCommands = {
         "workingon": workingOn.sayWorkingOn,
@@ -28,8 +41,13 @@ var AdminCommands = {
         "bc": bc.bind(null, twitch),
         "benedictcumberbatch": bc.bind(null, twitch),
         "benedict": bc.bind(null, twitch),
-        "points": reportPoints.bind(null, userPoints, twitch)
-
+        "points": reportPoints.bind(null, userPoints, twitch),
+        "quote": reportQuotes.reportQuote,
+        "qoute": reportQuotes.reportQuote,
+        "addquote": commandCost.bind(null, userPoints, 100, twitch, reportQuotes.addQuote),
+        "addqoute": commandCost.bind(null, userPoints, 100, twitch, reportQuotes.addQuote),
+        "quoteadd": commandCost.bind(null, userPoints, 100, twitch, reportQuotes.addQuote),
+        "qouteadd": commandCost.bind(null, userPoints, 100, twitch, reportQuotes.addQuote),
     },
     textResponses = require('./js/commands/text-responses')(twitch);
 
@@ -47,6 +65,9 @@ users.userPersistsInChat(function (user) {
         if(err) console.log(err);
     })
 })
+setInterval(function () {
+    frontEnd.broadcastEvent("usersUpdate", users.getUserList());
+}, 1000);
 
 
 function executeCommands(user, message) {
@@ -68,18 +89,16 @@ function executeAdminCommands(command, parameters, user, message) {
 }
 
 //Features:
-//refactor commands
-//Loop through users!!!!
-//In chat users display (mod whack-a-mole)
+//In chat users display : https://github.com/geekuillaume/Node.js-Chat/blob/master/server.js
+//strawpoii links banned
+//get quote by id
+//SFX
 //command list (per-user availability)
 //user levels (db?)
 //push messages through wrapper and check for chat delay
 //dynamic add commands (and save to file/db)
 //spam protection?
 //polls : https://github.com/strawpoll/strawpoll/wiki/API
-//SFX
-//Point cost on commands
-//quote system
 //betting?
 //raid system (post link and host)
 //twitch alerts integration : https://twitchalerts.readme.io/

@@ -1,9 +1,9 @@
 {
-	"hi": "Heyya! {{user}} o/",
-	"hello": "Heyya {{user}}! o/",
-	"hai": "Hai {{user}} o/ !!",
-	"hey": "Hai {{user}} o/ !!",
-	"heyya": "hi {{user}} o/",
+	"hi": "Heyya! {{user}} HeyGuys",
+	"hello": "Heyya {{user}}! HeyGuys",
+	"hai": "Hai {{user}} HeyGuys !!",
+	"hey": "Hai {{user}} HeyGuys !!",
+	"heyya": "hi {{user}} HeyGuys",
 	"ping": "pong",
 	"pong": "Kappa",
 	"poing": "No! It's ping!",
@@ -24,5 +24,8 @@
 	"hype": "HYYYYYPE HYPE HYPE HYPE HYPE!!",
 	"knock": "Who's there?",
 	"asl": "2 days/non-binary/hogwarts",
-	"tinyhype": "ʰʸᵖᵉ"
+	"tinyhype": "ʰʸᵖᵉ",
+	"mom": "hello child <3",
+	"mum": "hello child <3",
+	"pew": "=========★"
 }

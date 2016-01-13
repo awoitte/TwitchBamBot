@@ -1,11 +1,10 @@
 var benedicts = require('./benedicts.json'),
-	cumberbunches = require('./cumberbunches.json');
+	cumberbunches = require('./cumberbunches.json'),
+	getRandom = require('../get-random-thing');
 
 module.exports = function (twitch){
-	var benedictId = Math.round(Math.random() * benedicts.length),
-		benedict = benedicts[benedictId],
-		cumberbunchesId = Math.round(Math.random() * cumberbunches.length),
-		cumberbunch = cumberbunches[cumberbunchesId];
+	var benedict = getRandom(benedicts),
+		cumberbunch = getRandom(cumberbunches);
 
 		twitch.say(benedict + " " + cumberbunch + "!");
 };

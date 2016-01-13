@@ -16,10 +16,12 @@
   "license": "MIT",
   "dependencies": {
     "cradle": "^0.6.9",
+    "express": "^4.13.3",
     "extend": "^3.0.0",
     "money": "^0.2.0",
     "mustache": "^2.2.1",
     "request": "^2.67.0",
+    "socket.io": "^1.4.4",
     "tmi.js": "0.0.24"
   }
 }

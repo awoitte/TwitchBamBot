@@ -6,13 +6,13 @@ module.exports = function(config, storageName) {
 
     db.exists(function(err, exists) {
         if (err) {
-            console.log("error!!!! Can't use CouchDB!!!");
+            console.log("error!!!! Can't use CouchDB!!!" + storageName);
             return;
         } else if (exists) {
-            console.log('twitchbot db exists.');
+            console.log(storageName + 'db exists.');
 
         } else {
-            console.log('database does not exists, creating.');
+            console.log(storageName + 'database does not exists, creating.');
             db.create();
         }
     });
@@ -21,7 +21,9 @@ module.exports = function(config, storageName) {
     	saveAThing: saveAThing.bind(null, db),
     	getAThing: getAThing.bind(null, db),
     	removeAThing: removeAThing.bind(null, db),
-        updateAThing: updateAThing.bind(null, db)
+        updateAThing: updateAThing.bind(null, db),
+        getAllTheThings: getAllTheThings.bind(null, db),
+        getThingsInView: getThingsInView.bind(null, db)
     };
 };
 
@@ -44,4 +46,11 @@ function updateAThing (db, id, thing, callback) {
         var newThing = extend({}, doc, thing);
         db.save(id,newThing, callback);
     });
+}
+function getAllTheThings (db, callback) {
+    db.all(callback);
+}
+
+function getThingsInView (db, view, callback) {
+    db.view(view, callback);
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>thatsBamBot</title>
+    <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+    body {
+        background: #1a1a1a;
+        color: #FFF;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.5em;
+        padding: 20px;
+    }
+    .pink{
+        color: #f2529d;
+    }
+    </style>
+</head>
+
+<body>
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="js/socket.io.js"></script>
+    HEY I'M THE BOT
+    <ul class="user-list"></ul>
+    <script>
+    var socket = io();
+
+    socket.on('usersUpdate', function(data) {
+        var userList = $(".user-list");
+
+        userList.html("");
+
+        data.forEach(function (username) {
+            var listItem = $("<li/>").html(username);
+            if(username === "mylittlebrohoho") listItem.addClass("pink");
+            userList.append(listItem);
+        })
+    });
+    </script>
+</body>
+
+</html>

@@ -1,8 +1,7 @@
-var responses = require('./eight-ball.json');
+var responses = require('./eight-ball.json'),
+	getRandom = require('../get-random-thing');
 
 module.exports = function (twitch){
-	var responseId = Math.round(Math.random() * responses.length),
-		response = responses[responseId];
-
+	var response = getRandom(responses);
 		twitch.say(response);
 };

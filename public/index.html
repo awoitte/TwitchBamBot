@@ -10,11 +10,8 @@
         background: #1a1a1a;
         color: #FFF;
         font-family: 'Open Sans', sans-serif;
-        font-size: 1.5em;
+        font-size: 1.25em;
         padding: 20px;
-    }
-    .pink{
-        color: #f2529d;
     }
     </style>
 </head>
@@ -25,6 +22,20 @@
     HEY I'M THE BOT
     <ul class="user-list"></ul>
     <script>
+    var customColours = {
+            "mylittlebrohoho": "#f2529d",
+            "nommander": "green",
+            "onsetgames": "#933a49",
+            "qeraix": "#aa0000",
+            "dienter": "black",
+            "arthurgoodman": "#87e23d",
+            "mayazimmerman": "#5dff00",
+            "kml1213": "#000009"
+        },
+        cachedColors = {
+
+        };
+
     var socket = io();
 
     socket.on('usersUpdate', function(data) {
@@ -32,12 +43,46 @@
 
         userList.html("");
 
-        data.forEach(function (username) {
-            var listItem = $("<li/>").html(username);
-            if(username === "mylittlebrohoho") listItem.addClass("pink");
+        data.forEach(function(username) {
+            var listItem = $("<li/>").html(username),
+                userColor;
+
+            if (customColours[username]) userColor = customColours[username]
+            else if (cachedColors[username]) userColor = cachedColors[username]
+            else {
+                cachedColors[username] = "#" + randomColor();
+                userColor = cachedColors[username]
+            }
+            listItem.css({
+                color: userColor
+            });
             userList.append(listItem);
         })
     });
+
+    socket.on('sfx', function(file) {
+        var audio = document.createElement("AUDIO");
+        audio.src = file;
+        audio.autoplay = true;
+        document.body.appendChild(audio);
+        audio.addEventListener("ended", function() {
+            document.body.removeChild(audio);
+        }, true);
+
+        audio.addEventListener("error", function() {
+            document.body.removeChild(audio);
+        }, true);
+    });
+
+    socket.on('disconnect', function() {
+        document.location.reload(true);
+    });
+
+    function randomColor(argument) {
+        return "000000".replace(/0/g, function() {
+            return (~~(Math.random() * 16)).toString(16);
+        });
+    }
     </script>
 </body>
 

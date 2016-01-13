@@ -15,6 +15,7 @@ var config = require('./config/config.json'),
     joke = require('./js/commands/joke'),
     eightBall = require('./js/commands/eight-ball'),
     bc = require('./js/commands/bc'),
+    sound = require('./js/commands/sound'),
     frontEnd = require('./js/front-end')(__dirname + "\\public");
 
 var AdminCommands = {
@@ -26,6 +27,8 @@ var AdminCommands = {
         "addqoute": reportQuotes.addQuote,
         "quoteadd": reportQuotes.addQuote,
         "qouteadd": reportQuotes.addQuote,
+        "sound": sound.bind(null, frontEnd),
+        "sfx": sound.bind(null, frontEnd)
     },
     customCommands = {
         "workingon": workingOn.sayWorkingOn,
@@ -48,6 +51,8 @@ var AdminCommands = {
         "addqoute": commandCost.bind(null, userPoints, 100, twitch, reportQuotes.addQuote),
         "quoteadd": commandCost.bind(null, userPoints, 100, twitch, reportQuotes.addQuote),
         "qouteadd": commandCost.bind(null, userPoints, 100, twitch, reportQuotes.addQuote),
+        "sound": commandCost.bind(null, userPoints, 20, twitch, sound.bind(null, frontEnd)),
+        "sfx": commandCost.bind(null, userPoints, 20, twitch, sound.bind(null, frontEnd)),
     },
     textResponses = require('./js/commands/text-responses')(twitch);
 
@@ -68,7 +73,6 @@ users.userPersistsInChat(function (user) {
 setInterval(function () {
     frontEnd.broadcastEvent("usersUpdate", users.getUserList());
 }, 1000);
-
 
 function executeCommands(user, message) {
     var parsed = parseMessage(message);

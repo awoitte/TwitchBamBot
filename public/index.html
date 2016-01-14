@@ -17,20 +17,29 @@
     ul {
         list-style: none;
     }
+
+    [data-specialColor="rainbow"]{
+        display: inline-block;
+        background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
+        background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
+        color: transparent !important;
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
     </style>
 </head>
 
 <body>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="js/socket.io.js"></script>
-    HEY I'M THE BOT <br>
-    set your colour in chat: <br>
-    colour [colour name]
+    HEY I'M THE BOT
+    <br> set your colour in chat:
+    <br> colour [colour name]
     <ul class="user-list"></ul>
     <script>
     var options = {
-            disconnected: false
-        };
+        disconnected: false
+    };
 
     var socket = io();
 
@@ -41,8 +50,10 @@
 
         data.forEach(function(userObj) {
             var username = userObj.key,
-                listItem = $("<li/>").html(username),
-                userColor = userObj.value;
+                userColor = userObj.value,
+                listItem = $("<li/>").html(username).addClass(username);
+
+                listItem.attr("data-specialColor", userColor);
 
             listItem.css({
                 color: userColor
@@ -64,12 +75,6 @@
             document.body.removeChild(audio);
         }, true);
     });
-
-    function randomColor(argument) {
-        return "000000".replace(/0/g, function() {
-            return (~~(Math.random() * 16)).toString(16);
-        });
-    }
 
     //disconnect/reconnect
     socket.on('connection', function() {

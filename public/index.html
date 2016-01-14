@@ -13,46 +13,37 @@
         font-size: 1.25em;
         padding: 20px;
     }
+
+    ul {
+        list-style: none;
+    }
     </style>
 </head>
 
 <body>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="js/socket.io.js"></script>
-    HEY I'M THE BOT
+    HEY I'M THE BOT <br>
+    set your colour in chat: <br>
+    colour [colour name]
     <ul class="user-list"></ul>
     <script>
-    var customColours = {
-            "mylittlebrohoho": "#f2529d",
-            "nommander": "green",
-            "onsetgames": "#933a49",
-            "qeraix": "#aa0000",
-            "dienter": "black",
-            "arthurgoodman": "#87e23d",
-            "mayazimmerman": "#5dff00",
-            "kml1213": "#000009"
-        },
-        cachedColors = {
-
+    var options = {
+            disconnected: false
         };
 
     var socket = io();
 
-    socket.on('usersUpdate', function(data) {
+    socket.on('usersWithColours', function(data) {
         var userList = $(".user-list");
 
         userList.html("");
 
-        data.forEach(function(username) {
-            var listItem = $("<li/>").html(username),
-                userColor;
+        data.forEach(function(userObj) {
+            var username = userObj.key,
+                listItem = $("<li/>").html(username),
+                userColor = userObj.value;
 
-            if (customColours[username]) userColor = customColours[username]
-            else if (cachedColors[username]) userColor = cachedColors[username]
-            else {
-                cachedColors[username] = "#" + randomColor();
-                userColor = cachedColors[username]
-            }
             listItem.css({
                 color: userColor
             });
@@ -74,14 +65,35 @@
         }, true);
     });
 
-    socket.on('disconnect', function() {
-        document.location.reload(true);
-    });
-
     function randomColor(argument) {
         return "000000".replace(/0/g, function() {
             return (~~(Math.random() * 16)).toString(16);
         });
+    }
+
+    //disconnect/reconnect
+    socket.on('connection', function() {
+        options.disconnected = false;
+        console.log("CONNECTED");
+    });
+
+    socket.on('reconnect', function() {
+        options.disconnected = false;
+        console.log("RECONNECTED");
+    });
+
+    socket.on('disconnect', function() {
+        options.disconnected = true;
+        console.log("DISCONNECT");
+        startRefresh();
+    });
+
+    function startRefresh() {
+        socket.io.reconnect();
+        console.log("RECONNECT ATTEMPT");
+        setTimeout(function() {
+            if (options.disconnected === true) startRefresh();
+        }, 1000);
     }
     </script>
 </body>

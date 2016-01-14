@@ -87,7 +87,7 @@ function fetchOnlineStatus(options, callback) {
             function(error, response, body) {
                 options.lastOnlineRequestFinished = true;
                 if (!error && response.statusCode == 200) {
-                    callback(body)
+                    callback(body);
                 } else {
                     console.log("fetch online error: " + error);
                     if(response.statusCode != 200) console.log("with response code: " + response.statusCode);

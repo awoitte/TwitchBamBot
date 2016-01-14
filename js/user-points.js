@@ -1,28 +1,22 @@
+var UserStorageAccess = require('./user-storage-access');
+
 module.exports = function(userStorage) {
+    var userStorageAccess = UserStorageAccess(userStorage);
+
     return {
-        awardUserPoint: awardUserPoint.bind(null, userStorage),
-        modifyUserPoints: modifyUserPoints.bind(null, userStorage),
+        awardUserPoint: awardUserPoint.bind(null, userStorageAccess),
+        modifyUserPoints: modifyUserPoints.bind(null, userStorageAccess),
         getUserPoints: getUserPoints.bind(null, userStorage)
     };
 };
 
-function getUser(storage, user, callback) {
-    storage.getAThing(user, function(err, userObj) {
-        if (err && !err.headers.status === 404) {
-            if (callback) callback(err);
-            return;
-        }
 
-        if (!userObj) userObj = makeUserObj(user);
-        if (callback) callback(false, userObj);
-    })
-}
 
 function awardUserPoint(storage, user, callback) {
-    getUser(storage, user, function(err, userObj) {
+    storage.getUser(user, function(err, userObj) {
         var updatedUser = addPoints(userObj);
-        updateUserObj(storage, user, updatedUser);
-        if (callback) callback(false, updateUserObj);
+        storage.updateUserObj(user, updatedUser);
+        if (callback) callback(false, updatedUser);
     });
 }
 
@@ -30,17 +24,6 @@ function addPoints(userObj, quantity) {
     if (!userObj.points) userObj.points = 0;
     userObj.points += quantity || 1;
     return userObj;
-}
-
-function makeUserObj(user) {
-    return {
-        name: user,
-        points: 0
-    }
-}
-
-function updateUserObj(storage, user, userObj) {
-    storage.saveAThing(user, userObj);
 }
 
 
@@ -60,10 +43,10 @@ function modifyUserPoints(userStorage, callback, command, parameters, adminUser,
 
     if (isNaN(quantityOfPoints)) return callback("invalid points quantity");
 
-    getUser(userStorage, username, function(err, userObj) {
-        if(err && callback) callback(err);
+    userStorage.getUser(username, function(err, userObj) {
+        if (err && callback) callback(err);
         var updatedUser = addPoints(userObj, quantityOfPoints);
-        updateUserObj(userStorage, username, updatedUser);
+        userStorage.updateUserObj(username, updatedUser);
         if (callback) callback(false, updatedUser);
     });
 }

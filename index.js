@@ -17,6 +17,8 @@ var config = require('./config/config.json'),
     bc = require('./js/commands/bc'),
     frontEnd = require('./js/front-end')(__dirname + "\\public"),
     colour = require('./js/commands/colour')(userStorage, twitch, frontEnd, users),
+    pushPoints = require('./js/emit-points-for-UI')(userStorage, users, frontEnd),
+    pushUsers = require('./js/emit-users-for-UI')(users, frontEnd),
     commands = require('./js/commands/commands'),
     sound = require('./js/commands/sound')(frontEnd, 20, commandCost, userPoints, twitch);
 
@@ -54,6 +56,7 @@ var textResponses = require('./js/commands/text-responses')(twitch),
         "qouteadd": commandCost.bind(null, userPoints, 100, twitch, reportQuotes.addQuote),
         "sound": sound.playSound,
         "sfx": sound.playSound,
+        "soundfx": sound.playSound,
         "color": colour.setUserColor,
         "colour": colour.setUserColor
     };

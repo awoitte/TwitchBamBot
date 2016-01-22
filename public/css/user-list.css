@@ -29,7 +29,7 @@
         background-size:
     }
 
-    [data-color="liverainbow"] {
+    [data-color="liverainbow"], [data-color="fabulous"] {
         animation: colorRotate 15s linear 0s infinite;
     }
 

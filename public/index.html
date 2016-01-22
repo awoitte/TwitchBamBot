@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <title>thatsBamBot</title>
     <link rel="stylesheet" href="css/user-list.css">
+    <link rel="stylesheet" href="css/flag-icons-data.css">
 </head>
 
 <body>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="js/socket.io.js"></script>
     HEY I'M THE BOT
-    <br> set your colour in chat:
+    <br> set your colour/flag in chat:
     <br> colour [colour name]
+    <br> flag [country abreviation (eg. ca)]
     <ul class="user-list"></ul>
     <script>
     var options = {
@@ -23,6 +25,10 @@
 
     socket.on('usersWithColours', function(data) {
         syncUsersAndColor(data);
+    });
+
+    socket.on('usersWithFlags', function(data) {
+        syncUsersAndFlags(data);
     });
 
     socket.on('usersWithPoints', function(data) {
@@ -88,6 +94,18 @@
         })
     }
 
+    function syncUsersAndFlags(data) {
+        var userList = $(".user-list");
+
+        data.forEach(function(userObj) {
+            var username = userObj.key,
+                flagCode = userObj.value,
+                currentEl = $("[data-user='" + username + "']");
+
+            currentEl.attr("data-flag", flagCode);
+        })
+    }
+
     function updateUserList(data) {
         var userList = $(".user-list"),
             currentUsers = userList.children();
@@ -116,12 +134,27 @@
     }
 
     function updateUsersWithPoints(data) {
-        data.forEach(function(userObj) {
+
+        data.sort(function(a, b) {
+            if (a.value < b.value) {
+                return -1;
+            }
+            if (a.value > b.value) {
+                return 1;
+            }
+            // a must be equal to b
+            return 0;
+        })
+
+        var $list = $("ul");
+        data.forEach(function(userObj, i) {
             var username = userObj.key,
                 points = userObj.value,
                 currentEl = $("[data-user='" + username + "']");
 
             currentEl.attr("data-points", points);
+            //currentEl.prependTo($list)
+
         })
     }
     </script>

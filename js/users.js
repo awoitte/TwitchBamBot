@@ -68,7 +68,7 @@ function resetUsers(options) {
 
 function addUser(options, user) {
     if (options.users.indexOf(user) === -1) {
-        console.log("adding user " + user);
+        //console.log("adding user " + user);
         options.users.push(user);
         options.userInChatCallbacks.forEach(function(callback) {
             callback(user);
@@ -90,7 +90,7 @@ function fetchOnlineStatus(options, callback) {
                     callback(body);
                 } else {
                     console.log("fetch online error: " + error);
-                    if(response.statusCode != 200) console.log("with response code: " + response.statusCode);
+                    if(response && response.statusCode != 200) console.log("with response code: " + response.statusCode);
                 }
             })
     }

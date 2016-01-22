@@ -17,6 +17,7 @@ var config = require('./config/config.json'),
     bc = require('./js/commands/bc'),
     frontEnd = require('./js/front-end')(__dirname + "\\public"),
     colour = require('./js/commands/colour')(userStorage, twitch, frontEnd, users),
+    flags = require('./js/commands/flag')(userStorage, twitch, frontEnd, users),
     pushPoints = require('./js/emit-points-for-UI')(userStorage, users, frontEnd),
     pushUsers = require('./js/emit-users-for-UI')(users, frontEnd),
     commands = require('./js/commands/commands'),
@@ -58,7 +59,9 @@ var textResponses = require('./js/commands/text-responses')(twitch),
         "sfx": sound.playSound,
         "soundfx": sound.playSound,
         "color": colour.setUserColor,
-        "colour": colour.setUserColor
+        "colour": colour.setUserColor,
+        "flag": flags.setUserFlag,
+        "flags": flags.setUserFlag
     };
 
     //needs to get data about itself
@@ -98,6 +101,9 @@ function executeAdminCommands(command, parameters, user, message) {
 }
 
 //Features:
+// Fon Awesome and icons!
+//gambeling
+//sound cooldown
 //strawpoii links banned
 //get quote by id
 //user levels (db?)

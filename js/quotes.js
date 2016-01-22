@@ -35,7 +35,7 @@ function saveQuote (storage, quote) {
 
 function getQuote (storage, callback) {
 	getAllQuotes(storage, function (quotes) {
-		console.log(quotes)
+		//console.log(quotes)
 		callback(getRandom(quotes));
 	});
 }

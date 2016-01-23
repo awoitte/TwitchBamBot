@@ -1,4 +1,9 @@
 
+
+[data-flag="nato"]:after {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/37/Flag_of_NATO.svg);
+}
+
 [data-flag="bisexual"]:after {
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/3e/Bi_flag.svg);
 }

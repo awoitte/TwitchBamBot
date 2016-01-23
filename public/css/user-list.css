@@ -1,62 +1,72 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-    body {
-        background: #1a1a1a;
-        color: #FFF;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 1.25em;
-        padding: 20px;
-    }
+body {
+    background: #1a1a1a;
+    color: #FFF;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.25em;
+    padding: 20px;
+}
 
-    ul {
-        list-style: none;
-        white-space: pre;
-        line-height: 1.25em;
-    }
+ul {
+    list-style: none;
+    white-space: pre;
+    line-height: 1.25em;
+}
 
-    li::before {
-        display: inline;
-        content: attr(data-points);
-        padding-right: 15px;
-    }
+li::before {
+    display: inline;
+    content: attr(data-points);
+    padding-right: 15px;
+}
 
-    [data-color="rainbow"] {
-        display: inline-block;
-        background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
-        background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
-        color: transparent !important;
-        -webkit-background-clip: text;
-        background-clip: text;
-        background-size:
-    }
+[data-color="rainbow"] {
+    display: inline-block;
+    background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
+    background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
+    color: transparent !important;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
 
-    [data-color="liverainbow"], [data-color="fabulous"] {
-        animation: colorRotate 15s linear 0s infinite;
-    }
+[data-color="smooth_dog"] {
+    display: inline-block;
+    color: transparent !important;
+    background-image: -webkit-linear-gradient(left, green, pink);
+    background-image: linear-gradient(left, green, pink);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-    [data-color="momster"] {
-        text-shadow: 0 0 3px #FF0000;
-    }
+[data-color="liverainbow"],
+[data-color="fabulous"] {
+    animation: colorRotate 15s linear 0s infinite;
+}
 
-    @keyframes colorRotate {
-        from {
-            color: rgb(255, 0, 0);
-        }
-        16.6% {
-            color: rgb(255, 0, 255);
-        }
-        33.3% {
-            color: rgb(0, 0, 255);
-        }
-        50% {
-            color: rgb(0, 255, 255);
-        }
-        66.6% {
-            color: rgb(0, 255, 0);
-        }
-        83.3% {
-            color: rgb(255, 255, 0);
-        }
-        to {
-            color: rgb(255, 0, 0);
-        }
+[data-color="momster"] {
+    text-shadow: 0 0 3px #FF0000;
+}
+
+@keyframes colorRotate {
+    from {
+        color: rgb(255, 0, 0);
     }
+    16.6% {
+        color: rgb(255, 0, 255);
+    }
+    33.3% {
+        color: rgb(0, 0, 255);
+    }
+    50% {
+        color: rgb(0, 255, 255);
+    }
+    66.6% {
+        color: rgb(0, 255, 0);
+    }
+    83.3% {
+        color: rgb(255, 255, 0);
+    }
+    to {
+        color: rgb(255, 0, 0);
+    }
+}

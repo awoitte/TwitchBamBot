@@ -40,16 +40,18 @@
     });
 
     socket.on('sfx', function(file) {
-        var audio = document.createElement("AUDIO");
+        var audio = document.createElement("AUDIO"),
+        // save some time by adding a reference to the <body> element
+        var documentBody = document.getElementsByTagName('body')[0];
         audio.src = file;
         audio.autoplay = true;
-        document.body.appendChild(audio);
+        documentBody.appendChild(audio);
         audio.addEventListener("ended", function() {
-            document.body.removeChild(audio);
+            documentBody.removeChild(audio);
         }, true);
 
         audio.addEventListener("error", function() {
-            document.body.removeChild(audio);
+            documentBody.removeChild(audio);
         }, true);
     });
 
@@ -79,35 +81,43 @@
     }
 
     function syncUsersAndColor(data) {
-        var userList = $(".user-list");
+        var userList = $("ul.user-list");
 
-        data.forEach(function(userObj) {
-            var username = userObj.key,
-                userColor = userObj.value,
-                currentEl = $("[data-user='" + username + "']");
-
-            currentEl.attr("data-color", userColor);
-
-            currentEl.css({
-                color: userColor
-            });
-        })
+        // for-in is faster then forEach<native> or each<jQuery>
+        for(var objectKey in data){
+            if(data.hasOwnProperty(objectKey)){
+                var userObj = data[objectKey],
+                    username = userObj.key,
+                    userColor = userObj.value,
+                    currentEl = $("[data-user='" + username + "']");
+    
+                currentEl.attr("data-color", userColor);
+    
+                currentEl.css({
+                    color: userColor
+                });
+            }
+        }
     }
 
     function syncUsersAndFlags(data) {
-        var userList = $(".user-list");
+        var userList = $("ul.user-list");
 
-        data.forEach(function(userObj) {
-            var username = userObj.key,
-                flagCode = userObj.value,
-                currentEl = $("[data-user='" + username + "']");
-
-            currentEl.attr("data-flag", flagCode);
-        })
+        // for-in is faster then forEach<native> or each<jQuery>
+        for(var objectKey in data){
+            if(data.hasOwnProperty(objectKey)){
+                var userObj = data[objectKey],
+                    username = userObj.key,
+                    flagCode = userObj.value,
+                    currentEl = $("[data-user='" + username + "']");
+    
+                currentEl.attr("data-flag", flagCode);
+            }
+        }
     }
 
     function updateUserList(data) {
-        var userList = $(".user-list"),
+        var userList = $("ul.user-list"),
             currentUsers = userList.children();
 
         currentUsers.each(function(i, user) {
@@ -117,20 +127,23 @@
             if (data.indexOf(username) === -1) $user.remove();
         });
 
-
-        data.forEach(function(username) {
-            var currentEl = $("[data-user='" + username + "']");
-
-            if (currentEl.length === 0) {
-                var listItem = $("<li/>");
-
-                listItem
-                    .html(username)
-                    .attr("data-user", username);
-
-                userList.append(listItem);
+        // for-in is faster then forEach<native> or each<jQuery>
+        for(var arrayKey in data){
+            if(data.hasOwnProperty(arrayKey)){
+                var username = data[arrayKey],
+                    currentEl = $("[data-user='" + username + "']");
+    
+                if (currentEl.length === 0) {
+                    var listItem = $("<li/>");
+    
+                    listItem
+                        .html(username)
+                        .attr("data-user", username);
+    
+                    userList.append(listItem);
+                }
             }
-        })
+        }
     }
 
     function updateUsersWithPoints(data) {
@@ -147,15 +160,18 @@
         })
 
         var $list = $("ul");
-        data.forEach(function(userObj, i) {
-            var username = userObj.key,
-                points = userObj.value,
-                currentEl = $("[data-user='" + username + "']");
-
-            currentEl.attr("data-points", points);
-            //currentEl.prependTo($list)
-
-        })
+        
+        // for-in is faster then forEach<native> or each<jQuery>
+        for(var objectKey in data){
+            if(data.hasOwnProperty(objectKey)){
+                var userObj = data[objectKey],
+                    username = userObj.key,
+                    points = userObj.value,
+                    currentEl = $("[data-user='" + username + "']");
+    
+                currentEl.attr("data-points", points);
+            }
+        }
     }
     </script>
 </body>

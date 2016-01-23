@@ -1,0 +1,8 @@
+{
+	"channel": "#thatsBamboo",
+	"server": "irc.twitch.tv",
+	"port": 6667,
+	"password": "oauth:STUFFHERE",
+	"username": "thatsbambot",
+	"admin": "thatsbamboo"
+}

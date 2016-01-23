@@ -1,4 +1,4 @@
-var config = require('./config/config.json'),
+var config = require('./config/new-config.json'),
     twitch = require('./js/twitch')(config),
     Storage = require('./js/storage'),
     commandCost = require('./js/command-cost'),

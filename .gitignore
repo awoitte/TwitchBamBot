@@ -2,3 +2,4 @@ config.json
 node_modules/
 SFX/
 logs/
+config/new-config.json

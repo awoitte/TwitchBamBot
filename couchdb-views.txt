@@ -1,0 +1,27 @@
+twitchbot:
+
+users/byName
+function (doc) {
+  emit(doc._id, doc.name);
+}
+
+users/byPoints
+function (doc) {
+  emit(doc._id, doc.points);
+}
+
+users/byColours
+function (doc) {
+  emit(doc._id, doc.colour);
+}
+
+users/byFlags
+function (doc) {
+  emit(doc._id, doc.flag);
+}
+
+thatsbambotquotes:
+quotes/all
+function (doc) {
+  if(doc.isQuote) emit(doc._id, doc.quote);
+}

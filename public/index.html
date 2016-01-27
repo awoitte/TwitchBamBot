@@ -42,7 +42,7 @@
     socket.on('sfx', function(file) {
         var audio = document.createElement("AUDIO"),
         // save some time by adding a reference to the <body> element
-        var documentBody = document.getElementsByTagName('body')[0];
+        documentBody = document.getElementsByTagName('body')[0];
         audio.src = file;
         audio.autoplay = true;
         documentBody.appendChild(audio);
@@ -90,9 +90,9 @@
                     username = userObj.key,
                     userColor = userObj.value,
                     currentEl = $("[data-user='" + username + "']");
-    
+
                 currentEl.attr("data-color", userColor);
-    
+
                 currentEl.css({
                     color: userColor
                 });
@@ -110,7 +110,7 @@
                     username = userObj.key,
                     flagCode = userObj.value,
                     currentEl = $("[data-user='" + username + "']");
-    
+
                 currentEl.attr("data-flag", flagCode);
             }
         }
@@ -132,14 +132,14 @@
             if(data.hasOwnProperty(arrayKey)){
                 var username = data[arrayKey],
                     currentEl = $("[data-user='" + username + "']");
-    
+
                 if (currentEl.length === 0) {
                     var listItem = $("<li/>");
-    
+
                     listItem
                         .html(username)
                         .attr("data-user", username);
-    
+
                     userList.append(listItem);
                 }
             }
@@ -160,7 +160,7 @@
         })
 
         var $list = $("ul");
-        
+
         // for-in is faster then forEach<native> or each<jQuery>
         for(var objectKey in data){
             if(data.hasOwnProperty(objectKey)){
@@ -168,7 +168,7 @@
                     username = userObj.key,
                     points = userObj.value,
                     currentEl = $("[data-user='" + username + "']");
-    
+
                 currentEl.attr("data-points", points);
             }
         }

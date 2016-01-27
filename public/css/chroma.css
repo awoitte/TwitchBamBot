@@ -1,0 +1,9 @@
+.monitorChroma {
+	position: absolute;
+	top: 5px;
+	right:5px;
+	left:335px;
+	bottom:230px;
+	background:green;
+	border-radius: 10px
+}

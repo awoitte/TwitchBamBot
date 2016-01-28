@@ -44,7 +44,7 @@ function fetchUserList(options, callback) {
                     callback(body);
                 } else {
                     console.log("fetch users error:" + error);
-                    if(response.statusCode != 200) console.log("with response code: " + response.statusCode);
+                    if(response && response.statusCode != 200) console.log("with response code: " + response.statusCode);
                 }
             })
     }

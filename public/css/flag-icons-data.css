@@ -194,6 +194,7 @@
     background-image: url(https://lipis.github.io/flag-icon-css/flags/4x3/bz.svg);
 }
 
+[data-flag="freedom"]:after,
 [data-flag="ca"]:after {
     background-image: url(https://lipis.github.io/flag-icon-css/flags/4x3/ca.svg);
 }

@@ -46,6 +46,10 @@ li::before {
     animation: colorRotate 15s linear 0s infinite;
 }
 
+[data-color="freedom"] {
+    animation: colorCanada 15s linear 0s infinite;
+}
+
 [data-color="momster"] {
     text-shadow: 0 0 3px #FF0000;
 }
@@ -68,6 +72,18 @@ li::before {
     }
     83.3% {
         color: rgb(255, 255, 0);
+    }
+    to {
+        color: rgb(255, 0, 0);
+    }
+}
+
+@keyframes colorCanada {
+    from {
+        color: rgb(255, 0, 0);
+    }
+    50% {
+        color: rgb(255, 255, 255);
     }
     to {
         color: rgb(255, 0, 0);

@@ -1,0 +1,11 @@
+.bg {
+    position: absolute;
+    top: -25%;
+    left: -25%;
+    width: 150%;
+    height: 150%;
+    background-color: #1a2428 ;
+    /* rgba(116,194,178,1);*/
+    /*background: url(../imgs/congruent_pentagon.png) 50% 50%;*/
+    /* Background pattern from subtlepatterns.com */
+}

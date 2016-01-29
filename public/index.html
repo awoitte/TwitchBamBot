@@ -4,24 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <title>thatsBamBot</title>
-    <link rel="stylesheet" href="css/chroma.css">
     <link rel="stylesheet" href="css/user-list.css">
+    <link rel="stylesheet" href="css/bg.css">
     <link rel="stylesheet" href="css/flag-icons-data.css">
+    <link rel="stylesheet" href="css/monitor-shadow.css">
 </head>
 
 <body>
-    <div class="monitorChroma"></div>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="js/socket.io.js"></script>
-    HEY I'M THE BOT
-    <br> set your colour/flag in chat:
-    <br> colour [colour name]
-    <br> flag [country abreviation (eg. ca)]
-    <ul class="user-list"></ul>
+    <div class="bg"></div>
+    <div class="monitor-shadow"></div>
+    <div class="user-panel">
+        <div class="user-panel-text">
+            HEY I'M THE BOT
+            <br> set your colour/flag in chat:
+            <br> !colour
+            <br> !flag
+        </div>
+        <ul class="user-list"></ul>
+    </div>
     <script>
     var options = {
         disconnected: false
     };
+
+    cycleUsers();
 
     var socket = io();
 
@@ -43,8 +51,8 @@
 
     socket.on('sfx', function(file) {
         var audio = document.createElement("AUDIO"),
-        // save some time by adding a reference to the <body> element
-        documentBody = document.getElementsByTagName('body')[0];
+            // save some time by adding a reference to the <body> element
+            documentBody = document.getElementsByTagName('body')[0];
         audio.src = file;
         audio.autoplay = true;
         documentBody.appendChild(audio);
@@ -86,8 +94,8 @@
         var userList = $("ul.user-list");
 
         // for-in is faster then forEach<native> or each<jQuery>
-        for(var objectKey in data){
-            if(data.hasOwnProperty(objectKey)){
+        for (var objectKey in data) {
+            if (data.hasOwnProperty(objectKey)) {
                 var userObj = data[objectKey],
                     username = userObj.key,
                     userColor = userObj.value,
@@ -106,8 +114,8 @@
         var userList = $("ul.user-list");
 
         // for-in is faster then forEach<native> or each<jQuery>
-        for(var objectKey in data){
-            if(data.hasOwnProperty(objectKey)){
+        for (var objectKey in data) {
+            if (data.hasOwnProperty(objectKey)) {
                 var userObj = data[objectKey],
                     username = userObj.key,
                     flagCode = userObj.value,
@@ -130,8 +138,8 @@
         });
 
         // for-in is faster then forEach<native> or each<jQuery>
-        for(var arrayKey in data){
-            if(data.hasOwnProperty(arrayKey)){
+        for (var arrayKey in data) {
+            if (data.hasOwnProperty(arrayKey)) {
                 var username = data[arrayKey],
                     currentEl = $("[data-user='" + username + "']");
 
@@ -164,8 +172,8 @@
         var $list = $("ul");
 
         // for-in is faster then forEach<native> or each<jQuery>
-        for(var objectKey in data){
-            if(data.hasOwnProperty(objectKey)){
+        for (var objectKey in data) {
+            if (data.hasOwnProperty(objectKey)) {
                 var userObj = data[objectKey],
                     username = userObj.key,
                     points = userObj.value,
@@ -174,6 +182,51 @@
                 currentEl.attr("data-points", points);
             }
         }
+    }
+
+    function getBottom($el) {
+        var y = $el.position().top;
+        return y + $el.height();
+    }
+
+    function cycleUsers() {
+        var animationTime = 1000,
+            panel = $(".user-panel"),
+            list = $(".user-list");
+        console.log(getBottom(list), getBottom(panel));
+
+        if (getBottom(list) > getBottom(panel)) {
+            var lastItem = list.find("li").last();
+            console.log("animating");
+            list.animate({
+                top: "+=" + lastItem.height()
+            }, animationTime, function() {
+                console.log("animating done");
+                list.prepend(lastItem);
+                list.animate({
+                    top: "-=" + lastItem.height()
+                }, 0);
+                slideIn(lastItem);
+
+                cycleUsers();
+            });
+        } else {
+            setTimeout(cycleUsers, animationTime);
+        }
+    }
+
+    function slideIn($el) {
+        var animationTime = 750,
+            margin = 100,
+            moveBy = ($el.width() + margin);
+        $el.animate({
+            left: "-=" + moveBy
+
+        }, 0, function() {
+            $el.animate({
+                left: "+=" + moveBy
+            }, animationTime);
+        });
     }
     </script>
 </body>

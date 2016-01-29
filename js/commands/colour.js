@@ -28,7 +28,7 @@ function getUserColorList(userStorage, callback) {
 }
 
 function setUserColor(userStorage, twitch, command, parameters, user, message) {
-    if (parameters.length === 0) return twitch.say("Please include a colour");
+    if (parameters.length === 0) return twitch.say("Please include a CSS colour");
 
     var colour = parameters === "random" ? "#" + randomColor() : parameters;
 

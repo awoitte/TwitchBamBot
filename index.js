@@ -102,6 +102,7 @@ function executeAdminCommands(command, parameters, user, message) {
 }
 
 //Features:
+//Rock paper scissors
 // Fon Awesome and icons!
 //gambeling
 //sound cooldown

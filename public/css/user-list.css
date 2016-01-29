@@ -7,9 +7,34 @@ body {
     padding: 20px;
 }
 
+.user-list, li {
+    position: relative;
+}
+
+.user-panel {
+    position: absolute;
+    padding: 10px;
+    top: 5px;
+    left: 0px;
+    width: 300px;
+    bottom: 50px;
+    /*background: rgba(0, 0, 0, 0.25);*/
+    /*border-radius: 10px*/
+    z-index:10;
+    overflow: hidden;
+}
+
+.user-panel-text,
+ul{
+    text-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
 ul {
     list-style: none;
     white-space: pre;
+    padding: 10px 0 0 0;
+    margin: 0;
     line-height: 1.25em;
 }
 
@@ -19,6 +44,7 @@ li::before {
     padding-right: 15px;
 }
 
+
 /* {
     display: inline-block;
     background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
@@ -27,6 +53,7 @@ li::before {
     -webkit-background-clip: text;
     background-clip: text;
 }*/
+
 
 /*[data-color="smooth_dog"] {
     display: inline-block;
@@ -43,15 +70,41 @@ li::before {
 [data-color="liverainbow"],
 [data-color="fabulous"],
 [data-color="rainbow"] {
+    -webkit-animation: colorRotate 15s linear 0s infinite;
     animation: colorRotate 15s linear 0s infinite;
 }
 
 [data-color="freedom"] {
+    -webkit-animation: colorCanada 15s linear 0s infinite;
     animation: colorCanada 15s linear 0s infinite;
 }
 
 [data-color="momster"] {
     text-shadow: 0 0 3px #FF0000;
+}
+
+@-webkit-keyframes colorRotate {
+    from {
+        color: rgb(255, 0, 0);
+    }
+    16.6% {
+        color: rgb(255, 0, 255);
+    }
+    33.3% {
+        color: rgb(0, 0, 255);
+    }
+    50% {
+        color: rgb(0, 255, 255);
+    }
+    66.6% {
+        color: rgb(0, 255, 0);
+    }
+    83.3% {
+        color: rgb(255, 255, 0);
+    }
+    to {
+        color: rgb(255, 0, 0);
+    }
 }
 
 @keyframes colorRotate {
@@ -72,6 +125,18 @@ li::before {
     }
     83.3% {
         color: rgb(255, 255, 0);
+    }
+    to {
+        color: rgb(255, 0, 0);
+    }
+}
+
+@-webkit-keyframes colorCanada {
+    from {
+        color: rgb(255, 0, 0);
+    }
+    50% {
+        color: rgb(255, 255, 255);
     }
     to {
         color: rgb(255, 0, 0);

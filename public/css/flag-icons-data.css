@@ -1,3 +1,22 @@
+
+
+[data-flag="kappa"]:after {
+    background-image: url(https://cdn-images-1.medium.com/max/600/1*Ee2sxWyxWbD4YWrcdSTk9w.png);
+}
+
+[data-flag="spacex"]:after {
+    background-image: url(http://media2.s-nbcnews.com/i/MSNBC/Components/Photo/_new/130716-elon-musk-3p.jpg);
+}
+
+[data-flag="lambda"]:after,
+[data-flag="hl2"]:after {
+    background-image: url(http://vignette1.wikia.nocookie.net/half-life/images/d/dc/Lambda_logo.svg/revision/latest?cb=20100327174546&path-prefix=en);
+}
+
+[data-flag="rebel"]:after {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/2/2a/Rebel_Alliance_logo.svg);
+}
+
 [data-flag="un"]:after {
     background-image: url(https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg);
 }
@@ -1052,7 +1071,7 @@
 }
 
 [data-flag="gb-sct"]:after {
-    background-image: url(https://lipis.github.io/flag-icon-css/flags/4x3/gb-sct.svg);
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/1/10/Flag_of_Scotland.svg);
 }
 
 [data-flag="gb-wls"]:after {

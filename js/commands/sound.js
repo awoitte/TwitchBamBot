@@ -7,7 +7,8 @@ var fs = require('fs'),
 
 module.exports = function(frontEnd, costAmmount, cost, userPoints, twitch) {
 	var options = {
-		soundFiles: []
+		soundFiles: [],
+		enabled: true
 	};
 
     fs.readdir('C:/TwitchBot/public/SFX', function(err, data) {
@@ -15,11 +16,14 @@ module.exports = function(frontEnd, costAmmount, cost, userPoints, twitch) {
         options.soundFiles = filterSoundFiles(data);
     });
     return {
-        playSound: playSound.bind(null, options, frontEnd, costAmmount, cost, userPoints, twitch)
+        playSound: playSound.bind(null, options, frontEnd, costAmmount, cost, userPoints, twitch),
+        toggleSounds: toggleSounds.bind(null, options)
     }
 }
 
 function playSound(options, frontEnd, costAmmount, cost, userPoints, twitch, command, parameters, user, message) {
+	if(!options.enabled) return twitch.say("sound effects are currently disabled");
+
 	if(parameters === "") return twitch.say(options.soundFiles.join(", "));
 
 	var soundName = parameters === "random" ? getRandom(options.soundFiles) : parameters;
@@ -39,4 +43,8 @@ function filterSoundFiles (files) {
 	}).map(function (file) {
 		return file.replace(".mp3", "");
 	});
+}
+
+function toggleSounds (options) {
+	options.enabled = !options.enabled;
 }

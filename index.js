@@ -14,6 +14,7 @@ var config = require('./config/new-config.json'),
     cost = require('./js/commands/cost'),
     joke = require('./js/commands/joke'),
     eightBall = require('./js/commands/eight-ball'),
+    rps = require('./js/commands/rps'),
     bc = require('./js/commands/bc'),
     frontEnd = require('./js/front-end')(__dirname + "\\public"),
     colour = require('./js/commands/colour')(userStorage, twitch, frontEnd, users),
@@ -32,7 +33,8 @@ var textResponses = require('./js/commands/text-responses')(twitch),
         "addquote": reportQuotes.addQuote,
         "addqoute": reportQuotes.addQuote,
         "quoteadd": reportQuotes.addQuote,
-        "qouteadd": reportQuotes.addQuote
+        "qouteadd": reportQuotes.addQuote,
+        "togglesounds": sound.toggleSounds
     },
     customCommands = {
         "workingon": workingOn.sayWorkingOn,
@@ -62,7 +64,10 @@ var textResponses = require('./js/commands/text-responses')(twitch),
         "color": colour.setUserColor,
         "colour": colour.setUserColor,
         "flag": flags.setUserFlag,
-        "flags": flags.setUserFlag
+        "flags": flags.setUserFlag,
+        "rock": rps.bind(null, twitch),
+        "paper": rps.bind(null, twitch),
+        "scissors": rps.bind(null, twitch),
     };
 
     //needs to get data about itself
@@ -102,7 +107,6 @@ function executeAdminCommands(command, parameters, user, message) {
 }
 
 //Features:
-//Rock paper scissors
 // Fon Awesome and icons!
 //gambeling
 //sound cooldown

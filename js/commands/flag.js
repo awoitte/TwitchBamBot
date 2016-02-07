@@ -31,7 +31,7 @@ function setUserFlag(userStorage, twitch, command, parameters, user, message) {
     if (parameters.length === 0) return twitch.say("Use two letter abreviation: http://www.worldatlas.com/aatlas/ctycodes.htm");
 
     userStorage.getUser(user, function(err, userObj) {
-        userObj.flag = parameters;
+        userObj.flag = parameters.toLowerCase();
         userStorage.updateUserObj(user, userObj);
     });
 }

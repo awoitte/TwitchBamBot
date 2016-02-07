@@ -22,7 +22,8 @@ var config = require('./config/new-config.json'),
     pushPoints = require('./js/emit-points-for-UI')(userStorage, users, frontEnd),
     pushUsers = require('./js/emit-users-for-UI')(users, frontEnd),
     commands = require('./js/commands/commands'),
-    sound = require('./js/commands/sound')(frontEnd, 20, commandCost, userPoints, twitch);
+    sound = require('./js/commands/sound')(frontEnd, 20, commandCost, userPoints, twitch),
+    poll = require('./js/poll')(twitch);
 
 var textResponses = require('./js/commands/text-responses')(twitch),
     AdminCommands = {
@@ -34,7 +35,8 @@ var textResponses = require('./js/commands/text-responses')(twitch),
         "addqoute": reportQuotes.addQuote,
         "quoteadd": reportQuotes.addQuote,
         "qouteadd": reportQuotes.addQuote,
-        "togglesounds": sound.toggleSounds
+        "togglesounds": sound.toggleSounds,
+        "poll": poll.doPoll //eg. poll [title] option a, b,c,d,NEW OPTION
     },
     customCommands = {
         "workingon": workingOn.sayWorkingOn,
@@ -85,7 +87,7 @@ twitch.onwhisper(function(username, message) {
 users.userPersistsInChat(function(user) {
     userPoints.awardUserPoint(user, function(err) {
         if (err) console.log(err);
-    })
+    });
 });
 
 function executeCommands(user, message) {
@@ -116,8 +118,6 @@ function executeAdminCommands(command, parameters, user, message) {
 //push messages through wrapper and check for chat delay
 //dynamic add commands (and save to file/db)
 //spam protection?
-//polls : https://github.com/strawpoll/strawpoll/wiki/API
-//betting?
 //raid system (post link and host)
 //twitch alerts integration : https://twitchalerts.readme.io/
 // BUY PIZZA WITH POINTS

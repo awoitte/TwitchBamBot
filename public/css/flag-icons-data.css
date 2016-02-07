@@ -1,4 +1,7 @@
 
+[data-flag="<3"]:after {
+    background-image: url(https://static-cdn.jtvnw.net/emoticons/v1/9/1.0);
+}
 
 [data-flag="kappa"]:after {
     background-image: url(https://cdn-images-1.medium.com/max/600/1*Ee2sxWyxWbD4YWrcdSTk9w.png);

@@ -3,3 +3,4 @@ node_modules/
 SFX/
 logs/
 config/new-config.json
+public/imgs

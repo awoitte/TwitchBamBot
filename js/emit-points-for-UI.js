@@ -5,6 +5,7 @@ var userStorageAccess = UserStorageAccess(userStorage);
 
     setInterval(function() {
         getUserPointList(userStorageAccess, function(err, userObjs) {
+            if(err) return;
             var currentUsers = users.getUserList(),
                 usersWithPoints = currentUsers.map(function(username) {
                     return userObjs.find(function(obj) {
@@ -14,8 +15,8 @@ var userStorageAccess = UserStorageAccess(userStorage);
 
 
             frontEnd.broadcastEvent("usersWithPoints", usersWithPoints);
-        })
-    }, 1000);
+        });
+    }, 2000);
 
 
     return {

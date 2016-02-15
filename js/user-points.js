@@ -14,9 +14,14 @@ module.exports = function(userStorage) {
 
 function awardUserPoint(storage, user, callback) {
     storage.getUser(user, function(err, userObj) {
-        var updatedUser = addPoints(userObj);
-        storage.updateUserObj(user, updatedUser);
-        if (callback) callback(false, updatedUser);
+        if (err) {
+            console.log("error awarding user points: " + user);
+            if (callback) callback(err);
+        } else {
+            var updatedUser = addPoints(userObj);
+            storage.updateUserObj(user, updatedUser);
+            if (callback) callback(false, updatedUser);
+        }
     });
 }
 

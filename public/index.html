@@ -193,15 +193,12 @@
         var animationTime = 1000,
             panel = $(".user-panel"),
             list = $(".user-list");
-        console.log(getBottom(list), getBottom(panel));
 
         if (getBottom(list) > getBottom(panel)) {
             var lastItem = list.find("li").last();
-            console.log("animating");
             list.animate({
                 top: "+=" + lastItem.height()
             }, animationTime, function() {
-                console.log("animating done");
                 list.prepend(lastItem);
                 list.animate({
                     top: "-=" + lastItem.height()

@@ -5,6 +5,7 @@ module.exports = function(userStorage, twitch, frontEnd, users) {
 
     setInterval(function() {
         getUserColorList(userStorageAccess, function(err, userObjs) {
+            if(err) return;
             var currentUsers = users.getUserList(),
                 usersWithColour = currentUsers.map(function(username) {
                     return userObjs.find(function(obj) {
@@ -15,7 +16,7 @@ module.exports = function(userStorage, twitch, frontEnd, users) {
 
             frontEnd.broadcastEvent("usersWithColours", usersWithColour);
         })
-    }, 1000);
+    }, 2000);
 
     return {
         getUserColorList: getUserColorList.bind(null, userStorageAccess),
@@ -33,6 +34,7 @@ function setUserColor(userStorage, twitch, command, parameters, user, message) {
     var colour = parameters === "random" ? "#" + randomColor() : parameters;
 
     userStorage.getUser(user, function(err, userObj) {
+        if(err) return twith.say("Error setting colour D:");
         userObj.colour = colour;
         userStorage.updateUserObj(user, userObj);
     });

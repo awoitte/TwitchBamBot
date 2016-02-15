@@ -12,14 +12,15 @@ function updateUserObj(storage, user, userObj) {
 
 function getUser(storage, user, callback) {
     storage.getAThing(user, function(err, userObj) {
-        if (err && !err.headers.status === 404) {
+        if (!userObj && err && err.headers && err.headers.status === 404) userObj = makeUserObj(user);
+        else if (err) {
+            console.log("ERROR GETTING USER: ", err);
             if (callback) callback(err);
             return;
         }
 
-        if (!userObj) userObj = makeUserObj(user);
         if (callback) callback(false, userObj);
-    })
+    });
 }
 
 function getUserView (userStorage, view, callback) {

@@ -7,26 +7,27 @@ body {
     padding: 20px;
 }
 
-.user-list, li {
+.user-list,
+li {
     position: relative;
 }
 
 .user-panel {
     position: absolute;
     padding: 10px;
-    top: 5px;
     left: 0px;
+    top: 5px;
+    bottom: calc(50% - 50px);
     width: 300px;
-    bottom: 50px;
     /*background: rgba(0, 0, 0, 0.25);*/
     /*border-radius: 10px*/
-    z-index:10;
+    z-index: 10;
     overflow: hidden;
 }
 
 .user-panel-text,
-ul{
-    text-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+ul {
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     font-weight: bold;
 }
 

@@ -1,3 +1,22 @@
+[data-flag="kamil"]:after {
+    background-image: url(../imgs/kamil.jpg);
+}
+
+[data-flag="joaking"]:after {
+    background-image: url(../imgs/joaking.png);
+}
+
+[data-flag="brohoho"]:after {
+    background-image: url(../imgs/brohoho.png);
+}
+
+[data-flag="cow"]:after{
+    background-image: url(../imgs/cow.png);
+}
+
+[data-flag="ari"]:after, [data-user="thatsbambot"]:after {
+    background-image: url(../imgs/ari.png);
+}
 
 [data-flag="<3"]:after {
     background-image: url(https://static-cdn.jtvnw.net/emoticons/v1/9/1.0);
@@ -1081,7 +1100,7 @@
     background-image: url(https://lipis.github.io/flag-icon-css/flags/4x3/gb-wls.svg);
 }
 
-[data-flag]:after {
+[data-user]:after, [data-flag]:after {
     background-size: contain;
     background-repeat: no-repeat;
     display: inline-block;

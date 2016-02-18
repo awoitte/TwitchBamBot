@@ -1,4 +1,4 @@
-var punctuationRE = /([.!\?,'\/])/g;
+var punctuationRE = /([.!\?,'\/\"])/g;
 
 module.exports = function (message){
 	var first = message.split(" ")[0],

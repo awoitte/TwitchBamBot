@@ -2,7 +2,9 @@ var fs = require('fs'),
 	getRandom = require('../get-random-thing'),
 	bypassList = [
 		'thatsbamboo',
-		'mylittlebrohoho'
+		'mylittlebrohoho',
+		'qeraix',
+		'rosematoes'
 	];
 
 module.exports = function(frontEnd, costAmmount, cost, userPoints, twitch) {
@@ -26,7 +28,7 @@ function playSound(options, frontEnd, costAmmount, cost, userPoints, twitch, com
 
 	if(parameters === "") return twitch.say(options.soundFiles.join(", "));
 
-	var soundName = parameters === "random" ? getRandom(options.soundFiles) : parameters;
+	var soundName = parameters === "random" ? getRandom(options.soundFiles) : parameters.toLowerCase();
 
 	if(options.soundFiles.indexOf(soundName) === -1) return twitch.say("invalid file name, choose from: " + options.soundFiles.join(", "));
 

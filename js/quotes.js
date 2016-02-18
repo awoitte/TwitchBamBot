@@ -3,7 +3,8 @@ var getRandom = require('./get-random-thing');
 module.exports = function (storage){
     return {
         addQuote: addQuote.bind(null, storage),
-        getQuote: getQuote.bind(null, storage)
+        getQuote: getQuote.bind(null, storage),
+        getAllQuotes: getAllQuotes.bind(null, storage)
     };
 };
 

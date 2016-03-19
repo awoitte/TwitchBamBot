@@ -16,7 +16,6 @@
   "license": "MIT",
   "dependencies": {
     "clone": "^1.0.2",
-    "cradle": "^0.6.9",
     "express": "^4.13.3",
     "extend": "^3.0.0",
     "money": "^0.2.0",

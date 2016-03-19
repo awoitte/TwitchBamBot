@@ -13,7 +13,7 @@ module.exports = function(frontEnd, costAmmount, cost, userPoints, twitch) {
 		enabled: true
 	};
 
-    fs.readdir('C:/TwitchBot/public/SFX', function(err, data) {
+    fs.readdir('./public/SFX', function(err, data) {
         if (err) console.log("error:" + err);
         options.soundFiles = filterSoundFiles(data);
     });

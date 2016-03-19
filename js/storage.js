@@ -1,8 +1,9 @@
-var cradle = require('cradle'),
+var filedb = require('./file-db'),
     extend = require('extend');
 
 module.exports = function(config, storageName) {
-    var db = new(cradle.Connection)().database(storageName);
+    //var db = new(cradle.Connection)().database(storageName);
+    var db = filedb(storageName);
 
     db.exists(function(err, exists) {
         if (err) {

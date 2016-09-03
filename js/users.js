@@ -26,7 +26,8 @@ module.exports = function(twitch, onlineFrequency, offlineFrequency) {
 
     return {
         getUserList: getUserList.bind(null, options),
-        userPersistsInChat: options.userInChatCallbacks.push.bind(options.userInChatCallbacks)
+        userPersistsInChat: options.userInChatCallbacks.push.bind(options.userInChatCallbacks),
+        isOnline: function () { return options.online; }
     };
 };
 

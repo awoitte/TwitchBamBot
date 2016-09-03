@@ -29,12 +29,12 @@ function getUserColorList(userStorage, callback) {
 }
 
 function setUserColor(userStorage, twitch, command, parameters, user, message) {
-    if (parameters.length === 0) return twitch.say("Please include a CSS colour");
+    if (parameters.length === 0) return twitch.whisper(user, "Please include a CSS colour");
 
     var colour = parameters === "random" ? "#" + randomColor() : parameters;
 
     userStorage.getUser(user, function(err, userObj) {
-        if(err) return twith.say("Error setting colour D:");
+        if(err) return twith.whisper(user, "Error setting colour D:");
         userObj.colour = colour;
         userStorage.updateUserObj(user, userObj);
     });

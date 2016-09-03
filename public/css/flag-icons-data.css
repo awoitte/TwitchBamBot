@@ -1,3 +1,15 @@
+[data-flag="cirbaka"]:after {
+    background-image: url(https://static-cdn.jtvnw.net/emoticons/v1/106276/1.0);
+}
+
+[data-flag="btpizza"]:after {
+    background-image: url(https://cdn.betterttv.net/emote/57508db02053b7d2569a47ef/2x);
+}
+
+[data-flag="btheart"]:after {
+    background-image: url(https://cdn.betterttv.net/emote/56c24a3d4fb5f2f77f070b98/2x);
+}
+
 [data-flag="kamil"]:after {
     background-image: url(../imgs/kamil.jpg);
 }
@@ -16,6 +28,30 @@
 
 [data-flag="ari"]:after, [data-user="thatsbambot"]:after {
     background-image: url(../imgs/ari.png);
+}
+
+[data-flag="animu"]:after {
+    background-image: url(https://lh5.ggpht.com/Tj86SbC6eqIrdXPt23m5MfyTH9oJaVlBBKY3onludRtgIWma_cGN67A2Vp44w6dQLawC=w300);
+}
+
+[data-flag="linux"]:after {
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png);
+}
+
+[data-flag="seemsgood"]:after {
+    background-image: url(https://static-cdn.jtvnw.net/emoticons/v1/64138/1.0);
+}
+
+[data-flag="biblethump"]:after {
+    background-image: url(data:image/png;base64,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);
+}
+
+[data-flag="kreygasm"]:after {
+    background-image: url(https://static-cdn.jtvnw.net/emoticons/v1/41/1.0);
+}
+
+[data-flag="dansgame"]:after {
+    background-image: url(https://static-cdn.jtvnw.net/emoticons/v1/33/1.0);
 }
 
 [data-flag="<3"]:after {
@@ -1016,7 +1052,7 @@
     background-image: url(https://lipis.github.io/flag-icon-css/flags/4x3/um.svg);
 }
 
-[data-flag="us"]:after {
+[data-flag="us"]:after, [data-flag="usa"]:after {
     background-image: url(https://lipis.github.io/flag-icon-css/flags/4x3/us.svg);
 }
 

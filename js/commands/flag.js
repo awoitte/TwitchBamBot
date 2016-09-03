@@ -30,13 +30,13 @@ function getUserFlagList(userStorage, callback) {
 }
 
 function setUserFlag(userStorage, twitch, command, parameters, user, message) {
-    if (parameters.length === 0) return twitch.say("Use two letter abreviation or country name: http://www.worldatlas.com/aatlas/ctycodes.htm");
+    if (parameters.length === 0) return twitch.whisper(user, "Use two letter abreviation or country name: http://www.worldatlas.com/aatlas/ctycodes.htm");
 
     var abbr = getCountryAbbr(parameters),
         flagName = abbr ? abbr : parameters;
 
     userStorage.getUser(user, function(err, userObj) {
-        if(err) return twitch.say("Error setting flag D:");
+        if(err) return twitch.whisper(user, "Error setting flag D:");
         userObj.flag = flagName.toLowerCase();
         userStorage.updateUserObj(user, userObj);
     });

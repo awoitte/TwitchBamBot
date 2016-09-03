@@ -1,0 +1,57 @@
+[
+  {
+    "name": "squats",
+    "min": 15,
+    "max": 25
+  },
+  {
+    "name": "pushups",
+    "min": 10,
+    "max": 20
+  },
+  {
+    "name": "seconds of hand stretches while standing",
+    "min": 30,
+    "max": 60
+  },
+  {
+    "name": "sun salutations",
+    "min": 2,
+    "max": 6
+  },
+  {
+    "name": "jumping jacks",
+    "min": 15,
+    "max": 30
+  },
+  {
+    "name": "lunges",
+    "min": 10,
+    "max": 15
+  },
+  {
+    "name": "elbow lifts",
+    "min": 10,
+    "max": 20
+  },
+  {
+    "name": "calf raises",
+    "min": 20,
+    "max": 35
+  },
+  {
+    "name": "tuck jumps",
+    "min": 10,
+    "max": 20
+  },
+  {
+    "name": "seconds of planks",
+    "min": 60,
+    "max": 120
+  },
+  {
+    "name": "burpees",
+    "min": 10,
+    "max": 20
+  }
+]
